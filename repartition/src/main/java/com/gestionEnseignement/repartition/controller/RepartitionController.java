@@ -10,20 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.time.LocalDate;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/choix")
 public class RepartitionController {
     @Autowired
     private RepartitionService repartitionService;
-
     @Autowired
     private EnseignantRepository enseignantRepository;
-
     @Autowired
     private EnseignementRepository enseignementRepository;
 
@@ -45,7 +42,6 @@ public class RepartitionController {
         }
     }
 
-
     // Pour le bouton valider le choix
     @PutMapping("/{id}/valider")
     public ResponseEntity<?> valider(@PathVariable Long id) {
@@ -61,8 +57,7 @@ public class RepartitionController {
     @PutMapping("/{id}/modifier")
     public ResponseEntity<?> modifierChoix(
             @PathVariable Long id,
-            @RequestBody Repartition repartitionUpdate
-    ) {
+            @RequestBody Repartition repartitionUpdate) {
         Repartition repartitionExisting = repartitionService.findByEnseignantAndEnseignementAndType(
                 repartitionUpdate.getEnseignant(),
                 repartitionUpdate.getEnseignement(),
@@ -169,6 +164,21 @@ public class RepartitionController {
         }
         List<Enseignant> enseignants = repartitionService.getEnseignantsMemeChoix(enseignement, type);
         return ResponseEntity.ok(enseignants);
+    }
+
+
+    // Nouvel endpoint pour récupérer tous les enseignants
+    @GetMapping("/enseignants")
+    public ResponseEntity<List<Enseignant>> getAllEnseignants() {
+        List<Enseignant> enseignants = enseignantRepository.findAll();
+        return ResponseEntity.ok(enseignants);
+    }
+
+    // Nouvel endpoint pour récupérer tous les enseignements
+    @GetMapping("/enseignements")
+    public ResponseEntity<List<Enseignement>> getAllEnseignements() {
+        List<Enseignement> enseignements = enseignementRepository.findAll();
+        return ResponseEntity.ok(enseignements);
     }
 
 }

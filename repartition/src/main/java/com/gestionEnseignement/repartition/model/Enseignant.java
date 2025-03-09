@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data @AllArgsConstructor
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class Enseignant {
     @Id
@@ -24,5 +24,4 @@ public class Enseignant {
             inverseJoinColumns = @JoinColumn(name = "enseignement_id")
     )
     private List<Enseignement> enseignements = new ArrayList<>();
-
 }

@@ -1,6 +1,5 @@
 package com.gestionEnseignement.repartition.service;
 
-
 import com.gestionEnseignement.repartition.model.Enseignant;
 import com.gestionEnseignement.repartition.model.Enseignement;
 import com.gestionEnseignement.repartition.model.Repartition;
@@ -8,7 +7,6 @@ import com.gestionEnseignement.repartition.repository.EnseignementRepository;
 import com.gestionEnseignement.repartition.repository.RepartitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,7 +15,6 @@ import java.util.stream.Collectors;
 public class RepartitionService {
     @Autowired
     private RepartitionRepository repartitionRepository;
-
     @Autowired
     private EnseignementRepository enseignementRepository;
 
@@ -28,7 +25,6 @@ public class RepartitionService {
     public List<Repartition> findByEnseignementAndType(Enseignement enseignement, String type){
         return repartitionRepository.findByEnseignementAndType(enseignement,type);
     }
-
 
     public Repartition findByEnseignement(Enseignement enseignement){
         return repartitionRepository.findByEnseignement(enseignement);
@@ -127,5 +123,4 @@ public class RepartitionService {
                 .filter(e -> !enseignementsChoisis.contains(e))
                 .collect(Collectors.toList());
     }
-
 }

@@ -5,8 +5,6 @@ import com.gestionEnseignement.repartition.model.EnseignementClient;
 import com.gestionEnseignement.repartition.repository.EnseignementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,10 +43,10 @@ public class EnseignementService {
         return enseignementRepository.findAll();
     }
 
-
     public void save(Enseignement enseignement){
         enseignementRepository.save(enseignement);
     }
+
     public String findNomById(Long id){
         return enseignementClient.getNom(id);
     }
